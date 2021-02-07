@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+// Firebase Authenticationを使用するために、firebase/authを読み込む
 import 'firebase/auth'
 
 const firebaseConfig = {
@@ -11,7 +12,7 @@ const firebaseConfig = {
     appId: "1:924201044216:web:ec7976d2bfdbdae296530d",
     measurementId: "G-6P5N5MEZHW"
 }
-
+//認証情報を引数に与えてFirebase Appを初期化
 firebase.initializeApp(firebaseConfig)
 
 export default firebase

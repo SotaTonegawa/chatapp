@@ -1,18 +1,12 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import { useState, useContext } from 'react/cjs/react.development'
+import React, { useState, useContext } from 'react'
 import firebase from '../Config/firebase'
 import { AuthContext } from '../AuthService'
+import { Redirect } from 'react-router-dom'
 
+//historyに分割代入
 const Login = ({ history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    const user = useContext(AuthContext)
-
-    if (user) {
-        return <Redirect to="/" />
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -23,6 +17,16 @@ const Login = ({ history }) => {
             .catch(err => {
                 console.log('err')
             })
+    }
+
+    const user = useContext(AuthContext)
+
+    if (user) {
+        return <Redirect to="/" />
+    }
+
+    const toSignUp = () => {
+        return <Redirect to="/Signup" />
     }
 
     return (
@@ -55,6 +59,7 @@ const Login = ({ history }) => {
                 </div>
                 <button type='submit'>Login</button>
             </form>
+            <a href='' onClick={toSignUp}>初めての方はこちら</a>
         </>
     )
 }

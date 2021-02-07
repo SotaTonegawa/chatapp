@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Router, Redirect, Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import { AuthContext } from './AuthService'
 
 const LoggedInRoute = ({ component: Component, ...rest }) => {

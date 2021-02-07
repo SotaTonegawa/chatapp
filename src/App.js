@@ -1,6 +1,6 @@
 //App.js
 import React from 'react'
-import AuthProvider from './AuthService'
+import { AuthProvider } from './AuthService'
 import LoggedInRoute from './LoggedInRoute'
 
 import {
