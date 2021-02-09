@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import firebase from '../Config/firebase'
 import 'firebase/firestore'
-import { useContext } from 'react/cjs/react.development'
 import { AuthContext } from '../AuthService'
 
 const Room = () => {
     const [messages, setMessages] = useState('null')
     const [value, setValue] = useState('')
+
     const user = useContext(AuthContext)
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        firebase.firestore().collection('message')
+        firebase.firestore().collection('messages')
             .add({
                 content: value,
                 user: user.displayName,
                 date: new Date()
             })
-        setMessages([
-            ...messages,
-            {
-                user: user.displayName,
-                email: user.email,
-                content: value
-            }
-        ])
+        console.log('submitted!');
     }
 
     useEffect(() => {
@@ -33,7 +26,6 @@ const Room = () => {
                 const messages = snapshot.docs.map(doc => {
                     return doc.data()
                 })
-
                 setMessages(messages)
             })
     }, [])
@@ -42,9 +34,15 @@ const Room = () => {
         <>
             <h1>Room</h1>
             <ul>
-                <li>
+                {/* <li>
                     sample user : sample message
-                </li>
+                </li> */}
+                {
+                    messages ?
+                        messages.map(message => (
+                            <li>{message.user} : {message.content}</li>
+                        )) : <p>Loading...</p>
+                }
             </ul>
             <form>
                 <input
