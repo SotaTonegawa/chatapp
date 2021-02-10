@@ -1,5 +1,4 @@
 import React, { useState } from 'react' //予めuseStateをimportすることでReact.を省略可能
-// import { Redirect } from 'react-router-dom'
 import firebase from '../Config/firebase'
 
 const SignUp = () => {
@@ -15,13 +14,7 @@ const SignUp = () => {
                 user.updateProfile({
                     displayName: name
                 })
-                // inputの中身を空にしたいが方法がわからない...
-                // setEmail('')
-                // setPassword('')
-                // setName('')
                 alert('ユーザー登録が完了しました！')
-                // ユーザー登録後ログイン画面に遷移したい
-                // return <Redirect to='/login' />
             })
             .catch(err => {
                 console.log(err)

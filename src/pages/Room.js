@@ -17,7 +17,7 @@ const Room = () => {
                 user: user.displayName,
                 date: new Date()
             })
-        console.log('submitted!');
+        console.log(messages);
     }
 
     useEffect(() => {
@@ -34,9 +34,9 @@ const Room = () => {
         <>
             <h1>Room</h1>
             <ul>
-                {/* <li>
+                <li>
                     sample user : sample message
-                </li> */}
+                </li>
                 {
                     messages ?
                         messages.map(message => (
@@ -44,15 +44,15 @@ const Room = () => {
                         )) : <p>Loading...</p>
                 }
             </ul>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     text='text'
                     value={value}
                     onChange={e => setValue(e.target.value)}
                 />
-                <button type='submit' onSubmit={handleSubmit}>送信</button>
+                <button type='submit'>送信</button>
             </form>
-            <button onClick={() => firebase.auth().signOut()}> Logout</button>
+            <button onClick={() => firebase.auth().signOut()}>Logout</button>
         </>
     )
 }
