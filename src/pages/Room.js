@@ -4,7 +4,7 @@ import 'firebase/firestore'
 import { AuthContext } from '../AuthService'
 
 const Room = () => {
-    const [messages, setMessages] = useState('null')
+    const [messages, setMessages] = useState(null)
     const [value, setValue] = useState('')
 
     const user = useContext(AuthContext)
