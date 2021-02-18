@@ -23,7 +23,7 @@ const SignUp = () => {
     }
 
     return (
-        <div>
+        <div id='sign-up'>
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -64,6 +64,7 @@ const SignUp = () => {
                 </div>
                 <button type='submit'>Sign Up</button>
             </form>
+            <a href='/Login#login'>ログイン画面はこちら</a>
         </div>
     )
 }

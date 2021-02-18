@@ -30,7 +30,7 @@ const Login = ({ history }) => {
     }
 
     return (
-        <>
+        <div id='login'>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -59,8 +59,8 @@ const Login = ({ history }) => {
                 </div>
                 <button type='submit'>Login</button>
             </form>
-            <a href='' onClick={toSignUp}>初めての方はこちら</a>
-        </>
+            <a href='/Signup#sign-up' onClick={toSignUp}>初めての方はこちら</a>
+        </div>
     )
 }
 
