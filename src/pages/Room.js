@@ -2,6 +2,19 @@ import React, { useEffect, useState, useContext } from 'react'
 import firebase from '../Config/firebase'
 import 'firebase/firestore'
 import { AuthContext } from '../AuthService'
+import styled from 'styled-components'
+
+const RoomUl = styled.ul`
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+`;
+
+const RoomList = styled.li`
+    list-style: none;
+    color: #000;
+`;
 
 const Room = () => {
     const [messages, setMessages] = useState(null)
@@ -18,6 +31,7 @@ const Room = () => {
                 date: new Date()
             })
         console.log(messages);
+        console.log(firebase.firestore().collection('messages'))
     }
 
     useEffect(() => {
@@ -33,17 +47,14 @@ const Room = () => {
     return (
         <>
             <h1>Room</h1>
-            <ul>
-                <li>
-                    sample user : sample message
-                </li>
+            <RoomUl>
                 {
                     messages ?
                         messages.map(message => (
-                            <li>{message.user} : {message.content}</li>
+                            <RoomList>{message.user} : {message.content}</RoomList>
                         )) : <p>Loading...</p>
                 }
-            </ul>
+            </RoomUl>
             <form onSubmit={handleSubmit}>
                 <input
                     text='text'
