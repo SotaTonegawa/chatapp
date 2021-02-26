@@ -14,6 +14,8 @@ const RoomUl = styled.ul`
 const RoomList = styled.li`
     list-style: none;
     color: #000;
+    margin-bottom: 10px;
+    text-align: left;
 `;
 
 const Room = () => {
@@ -21,6 +23,11 @@ const Room = () => {
     const [value, setValue] = useState('')
 
     const user = useContext(AuthContext)
+
+    const messageTime = () => {
+        const time = new Date();
+        console.log(time);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -50,9 +57,13 @@ const Room = () => {
             <RoomUl>
                 {
                     messages ?
-                        messages.map(message => (
-                            <RoomList>{message.user} : {message.content}</RoomList>
-                        )) : <p>Loading...</p>
+                        messages.map(message => {
+                            const messageDay = new Date(message.date.seconds);
+                            let year = messageDay.getFullYear()
+                            let month = messageDay.getMonth()
+                            let date = messageDay.getDate()
+                            return <RoomList>{year}/{month + 1}/{date} {message.user} : {message.content}</RoomList>
+                        }) : <p>Loading...</p>
                 }
             </RoomUl>
             <form onSubmit={handleSubmit}>
@@ -64,6 +75,7 @@ const Room = () => {
                 <button type='submit'>送信</button>
             </form>
             <button onClick={() => firebase.auth().signOut()}>Logout</button>
+            <button onClick={messageTime}>time</button>
         </>
     )
 }
