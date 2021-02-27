@@ -33,6 +33,7 @@ const SignUp = () => {
                         type='email'
                         id='email'
                         placeholder='email'
+                        autoComplete='off'
                         onChange={e => {
                             setEmail(e.target.value)
                         }}
@@ -45,6 +46,7 @@ const SignUp = () => {
                         type='password'
                         id='password'
                         placeholder='password'
+                        autoComplete='off'
                         onChange={e => {
                             setPassword(e.target.value)
                         }}

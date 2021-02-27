@@ -15,7 +15,7 @@ const Login = ({ history }) => {
                 history.push("/")
             })
             .catch(err => {
-                console.log('err')
+                console.log(err)
             })
     }
 
@@ -52,6 +52,7 @@ const Login = ({ history }) => {
                         id='password'
                         name='password'
                         placeholder='password'
+                        autoComplete='off'
                         onChange={e => {
                             setPassword(e.target.value)
                         }}

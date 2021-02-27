@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import firebase from '../Config/firebase'
 import 'firebase/firestore'
 import { AuthContext } from '../AuthService'
+import shortid from 'shortid'
 import styled from 'styled-components'
 
 const RoomUl = styled.ul`
@@ -30,7 +31,8 @@ const Room = () => {
             .add({
                 content: value,
                 user: user.displayName,
-                date: new Date()
+                date: new Date(),
+                id: shortid.generate()
             })
         console.log(messages);
         console.log(firebase.firestore().collection('messages'))
@@ -47,6 +49,16 @@ const Room = () => {
             })
     }, [])
 
+    //messageの投稿が最新順に並べられるよう時間をsecondsで取得
+    const messageNumber = x => {
+        return x.date.seconds
+    }
+
+    //最新50件のみ表示させるための関数を作成したい
+    for (let i = 0; i < 50; i++) {
+
+    }
+
     return (
         <>
             <h1>Room</h1>
@@ -60,7 +72,8 @@ const Room = () => {
                             let date = messageDay.getDate()
                             let hour = messageDay.getHours()
                             let minutes = messageDay.getMinutes()
-                            return <RoomList>{year}/{month + 1}/{date} {hour}:{minutes}   {message.user} : {message.content}</RoomList>
+                            let uniqueId = message.id
+                            return <RoomList key={uniqueId}>{year}/{month + 1}/{date} {hour}:{minutes}   {message.user} : {message.content}</RoomList>
                         }) : <p>Loading...</p>
                 }
             </RoomUl>
@@ -69,6 +82,7 @@ const Room = () => {
                     text='text'
                     value={value}
                     onChange={e => setValue(e.target.value)}
+                    autoComplete='off'
                 />
                 <button type='submit'>送信</button>
             </form>
