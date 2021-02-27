@@ -17,7 +17,7 @@ const ReactApp = styled.div`
     text-align: center;
     background-color: #00bfff;
     color: #fff;
-    height: 200vh;
+    height: 2000px;
 `;
 
 const App = () => {

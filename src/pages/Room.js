@@ -7,9 +7,10 @@ import styled from 'styled-components'
 
 const RoomUl = styled.ul`
     background-color: #fff;
-    width: 80%;
-    margin: 0 auto;
+    width: 55%;
+    margin: 50px 0 0 100px;
     border-radius: 10px;
+    height: 1700px;
 `;
 
 const RoomList = styled.li`
@@ -34,8 +35,6 @@ const Room = () => {
                 date: new Date(),
                 id: shortid.generate()
             })
-        console.log(messages);
-        console.log(firebase.firestore().collection('messages'))
         setValue('');
     }
 
@@ -50,14 +49,15 @@ const Room = () => {
     }, [])
 
     //messageの投稿が最新順に並べられるよう時間をsecondsで取得
-    const messageNumber = x => {
-        return x.date.seconds
-    }
+    // const messageNumber = x => {
+    //     return x.date.seconds
+    // }
 
     //最新50件のみ表示させるための関数を作成したい
-    for (let i = 0; i < 50; i++) {
+    // let ary1 = [];
+    // for (let i = 0; i < 50; i++) {
 
-    }
+    // }
 
     return (
         <>
@@ -77,16 +77,19 @@ const Room = () => {
                         }) : <p>Loading...</p>
                 }
             </RoomUl>
-            <form onSubmit={handleSubmit}>
-                <input
-                    text='text'
-                    value={value}
-                    onChange={e => setValue(e.target.value)}
-                    autoComplete='off'
-                />
-                <button type='submit'>送信</button>
-            </form>
-            <button onClick={() => firebase.auth().signOut()}>Logout</button>
+            {/* ここのdivをスクロールで縦移動させたい */}
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        text='text'
+                        value={value}
+                        onChange={e => setValue(e.target.value)}
+                        autoComplete='off'
+                    />
+                    <button type='submit'>送信</button>
+                </form>
+                <button onClick={() => firebase.auth().signOut()}>Logout</button>
+            </div>
         </>
     )
 }
