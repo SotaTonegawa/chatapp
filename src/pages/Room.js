@@ -24,11 +24,6 @@ const Room = () => {
 
     const user = useContext(AuthContext)
 
-    const messageTime = () => {
-        const time = new Date();
-        console.log(time);
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         firebase.firestore().collection('messages')
@@ -39,6 +34,7 @@ const Room = () => {
             })
         console.log(messages);
         console.log(firebase.firestore().collection('messages'))
+        setValue('');
     }
 
     useEffect(() => {
@@ -58,11 +54,13 @@ const Room = () => {
                 {
                     messages ?
                         messages.map(message => {
-                            const messageDay = new Date(message.date.seconds);
+                            const messageDay = new Date(message.date.seconds * 1000);
                             let year = messageDay.getFullYear()
                             let month = messageDay.getMonth()
                             let date = messageDay.getDate()
-                            return <RoomList>{year}/{month + 1}/{date} {message.user} : {message.content}</RoomList>
+                            let hour = messageDay.getHours()
+                            let minutes = messageDay.getMinutes()
+                            return <RoomList>{year}/{month + 1}/{date} {hour}:{minutes}   {message.user} : {message.content}</RoomList>
                         }) : <p>Loading...</p>
                 }
             </RoomUl>
@@ -75,7 +73,6 @@ const Room = () => {
                 <button type='submit'>送信</button>
             </form>
             <button onClick={() => firebase.auth().signOut()}>Logout</button>
-            <button onClick={messageTime}>time</button>
         </>
     )
 }
