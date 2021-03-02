@@ -38,6 +38,7 @@ const Room = () => {
         setValue('');
     }
 
+
     useEffect(() => {
         firebase.firestore().collection('messages')
             .onSnapshot((snapshot) => {
@@ -48,10 +49,15 @@ const Room = () => {
             })
     }, [])
 
-    //messageの投稿が最新順に並べられるよう時間をsecondsで取得
-    // const messageNumber = x => {
-    //     return x.date.seconds
-    // }
+    // const sortMessages = messages.sort((a, b) => {
+    //     if (a.date < b.date) {
+    //         return -1;
+    //     } else {
+    //         return 1;
+    //     }
+    // });
+
+    // console.log(sortMessages);
 
     //最新50件のみ表示させるための関数を作成したい
     // let ary1 = [];
