@@ -46,7 +46,14 @@ const Room = () => {
                     return doc.data()
                 })
                 setMessages(messages)
-            })
+                messages.sort((a, b) => {
+                    if (a.date < b.date) {
+                        return -1
+                    } else {
+                        return 1;
+                    }
+                });
+            });
     }, [])
 
     // const sortMessages = messages.sort((a, b) => {
