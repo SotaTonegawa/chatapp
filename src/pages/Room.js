@@ -10,7 +10,8 @@ const RoomUl = styled.ul`
     width: 55%;
     margin: 50px 0 0 100px;
     border-radius: 10px;
-    height: 1700px;
+    height: 500px;
+    overflow: scroll;
 `;
 
 const RoomList = styled.li`
@@ -20,11 +21,27 @@ const RoomList = styled.li`
     text-align: left;
 `;
 
+const inputForm = styled.div`
+    background-color: #fff; 
+    width: 55%;
+    margin-left: 50px;
+`;
+
 const Room = () => {
-    const [messages, setMessages] = useState(null)
+    const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
 
     const user = useContext(AuthContext)
+
+    const sortMessages = array => {
+        array.sort((a, b) => {
+            if (a.date.seconds < b.date.seconds) {
+                return -1;
+            } else {
+                return 1;
+            }
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -46,36 +63,14 @@ const Room = () => {
                     return doc.data()
                 })
                 setMessages(messages)
-                messages.sort((a, b) => {
-                    if (a.date < b.date) {
-                        return -1
-                    } else {
-                        return 1;
-                    }
-                });
             });
     }, [])
-
-    // const sortMessages = messages.sort((a, b) => {
-    //     if (a.date < b.date) {
-    //         return -1;
-    //     } else {
-    //         return 1;
-    //     }
-    // });
-
-    // console.log(sortMessages);
-
-    //最新50件のみ表示させるための関数を作成したい
-    // let ary1 = [];
-    // for (let i = 0; i < 50; i++) {
-
-    // }
 
     return (
         <>
             <h1>Room</h1>
             <RoomUl>
+                {sortMessages(messages)}
                 {
                     messages ?
                         messages.map(message => {
@@ -86,12 +81,11 @@ const Room = () => {
                             let hour = messageDay.getHours()
                             let minutes = messageDay.getMinutes()
                             let uniqueId = message.id
-                            return <RoomList key={uniqueId}>{year}/{month + 1}/{date} {hour}:{minutes}   {message.user} : {message.content}</RoomList>
+                            return <RoomList key={uniqueId}>{year}/{month + 1}/{date} {hour}:{minutes}<br></br>{message.user} : {message.content}</RoomList>
                         }) : <p>Loading...</p>
                 }
             </RoomUl>
-            {/* ここのdivをスクロールで縦移動させたい */}
-            <div>
+            <inputForm>
                 <form onSubmit={handleSubmit}>
                     <input
                         text='text'
@@ -102,7 +96,7 @@ const Room = () => {
                     <button type='submit'>送信</button>
                 </form>
                 <button onClick={() => firebase.auth().signOut()}>Logout</button>
-            </div>
+            </inputForm>
         </>
     )
 }
