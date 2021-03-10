@@ -21,12 +21,6 @@ const RoomList = styled.li`
     text-align: left;
 `;
 
-const inputForm = styled.div`
-    background-color: #fff; 
-    width: 55%;
-    margin-left: 50px;
-`;
-
 const Room = () => {
     const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
@@ -85,7 +79,7 @@ const Room = () => {
                         }) : <p>Loading...</p>
                 }
             </RoomUl>
-            <inputForm>
+            <div>
                 <form onSubmit={handleSubmit}>
                     <input
                         text='text'
@@ -96,7 +90,7 @@ const Room = () => {
                     <button type='submit'>送信</button>
                 </form>
                 <button onClick={() => firebase.auth().signOut()}>Logout</button>
-            </inputForm>
+            </div>
         </>
     )
 }

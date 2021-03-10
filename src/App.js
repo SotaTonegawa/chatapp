@@ -17,12 +17,15 @@ const ReactApp = styled.div`
     text-align: center;
     background-color: #00bfff;
     color: #fff;
-    height: 2000px;
+    height: 100vh;
 `;
 
 const App = () => {
     return (
         <ReactApp>
+            <appHeader>
+                <h1>Chat App</h1>
+            </appHeader>
             <AuthProvider>
                 <Router>
                     <Switch>
@@ -32,6 +35,9 @@ const App = () => {
                     </Switch>
                 </Router>
             </AuthProvider>
+            <appFooter>
+
+            </appFooter>
         </ReactApp>
     )
 }
